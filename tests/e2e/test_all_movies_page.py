@@ -1,14 +1,20 @@
 # TODO: Feature 1
 from app import app
+from src.repositories.movie_repository import get_movie_repository
 
 #check to see no table if no saved movies
 def test_no_movies():
+    movie_repository = get_movie_repository()
+    movie_repository.clear_db()
+    
     test_client = app.test_client()
     response = test_client.post('/movies', data={}, follow_redirects=True)
     
     assert b'<h1 class="text-center">No Saved Movies!</h1>'
 
 def test_one_movie():
+    movie_repository = get_movie_repository()
+    movie_repository.clear_db()
     test_client = app.test_client()
     response = test_client.post('/movies', data={
         'title': 'Spiderman',
@@ -34,4 +40,6 @@ def test_one_movie():
     assert b'<td>Spiderman</td>' in response.data
     assert b'<td>Batman</td>' in response.data
     assert b'<td>2</td>' in response.data
+
+    movie_repository.clear_db()
 
