@@ -8,6 +8,7 @@ def test_update_movie_page(test_app: FlaskClient) -> None:
 
     # create a movie
     movie_repo = get_movie_repository()
+    movie_repo.clear_db()
     movie_repo.create_movie('Test Movie', 'Test Director', 5)
     movie = movie_repo.get_movie_by_title('Test Movie')
 
