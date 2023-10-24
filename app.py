@@ -30,6 +30,16 @@ def create_movies_form():
 def create_movie():
     # TODO: Feature 2
     # After creating the movie in the database, we redirect to the list all movies page
+    title = request.form.get('title')
+    director = request.form.get('director')
+    rating = request.form.get('rating')
+
+    if not title or not director or not rating or int(rating)>5 or int(rating)<1:
+        return redirect('/movies/new')
+
+    rating = int(rating)
+
+    movie_repository.create_movie(title=title, director=director, rating=rating)
     return redirect('/movies')
 
 
@@ -42,7 +52,8 @@ def search_movies():
 @app.get('/movies/<int:movie_id>')
 def get_single_movie(movie_id: int):
     # TODO: Feature 4
-    return render_template('get_single_movie.html')
+    single_movie = movie_repository.get_movie_by_id(movie_id)
+    return render_template('get_single_movie.html', single_movie = single_movie, movie_id = movie_id)
 
 
 @app.get('/movies/<int:movie_id>/edit')
