@@ -18,6 +18,7 @@ def test_update_movie_page(test_app: FlaskClient) -> None:
     assert len(movie_repo.get_all_movies()) == 1
     assert response.status_code == 200
     assert '<h1 class="mb-5">Edit Movie</h1>' in data
+    movie_repo.clear_db()
 
 
 # test post request
@@ -43,3 +44,4 @@ def test_update_movie_request(test_app: FlaskClient) -> None:
     assert movie2 is not None
     assert len(movie_repo.get_all_movies()) == 1
     assert movie_repo.get_movie_by_title('Test Movie') is None
+    movie_repo.clear_db()

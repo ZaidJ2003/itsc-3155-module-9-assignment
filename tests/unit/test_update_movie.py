@@ -22,3 +22,4 @@ def test_update_movie() -> None:
     assert len(movie_repo.get_all_movies()) == 1
     assert movie_repo.get_movie_by_title('Test Movie') is None
     assert movie_repo.get_movie_by_title('Test Movie 2') is not None
+    movie_repo.clear_db()
