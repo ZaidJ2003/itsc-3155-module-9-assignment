@@ -16,6 +16,7 @@ def test_get_all_movies():
 
     temp_dict = movie_repository.get_all_movies()
     assert len(temp_dict) == 3
+    movie_repository.clear_db()
 
 #test to see method gets all correct movies
 def test_get_all_correct_movies():
@@ -31,6 +32,7 @@ def test_get_all_correct_movies():
 
     assert temp_dict[movie2_id] == movie2
     assert temp_dict[movie3_id] == movie3
+    movie_repository.clear_db()
 
 
 

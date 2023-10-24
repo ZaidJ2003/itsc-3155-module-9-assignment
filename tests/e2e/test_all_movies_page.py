@@ -15,34 +15,23 @@ def test_one_movie():
         'director': 'Zaid Jebril',
         'rating': 3
     }, follow_redirects=True)
-    
+
+    # asserting that movie is posted correctly and non existent movie isnt there
     assert response.status_code == 200
     assert b'<td>Spiderman</td>' in response.data
     assert b'<td>Zaid Jebril</td>' in response.data
     assert b'<td>3</td>' in response.data
+    assert b'<td>Batman</td>' not in response.data
 
-
-#Testing that page loads and all movies are loaded
-def test_all_movies():
-    test_client = app.test_client()
-    
-    response = [
-    {
-        'title': 'Spiderman',
-        'director': 'Zaid Jebril',
-        'rating': 5
-    },
-    {
+    response = test_client.post('/movies', data={
         'title': 'Batman',
         'director': 'Sam Smith',
-        'rating': 3
-    }
-    ]
+        'rating': 2
+    }, follow_redirects=True)
 
-    response = test_client.post('/movies', data={'movies': response}, follow_redirects=True)
-
+    # asserting that first movie posted is still there after movie is added and new movie is there as well
     assert response.status_code == 200
-
     assert b'<td>Spiderman</td>' in response.data
     assert b'<td>Batman</td>' in response.data
+    assert b'<td>2</td>' in response.data
 
