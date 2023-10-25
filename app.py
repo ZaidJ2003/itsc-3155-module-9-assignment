@@ -93,4 +93,13 @@ def update_movie(movie_id: int):
 @app.post('/movies/<int:movie_id>/delete')
 def delete_movie(movie_id: int):
     # TODO: Feature 6
-    pass
+    global movie_repository
+    
+    movie_to_delete = movie_repository.get_movie_by_id(movie_id)
+    
+    # If the movie with the given ID doesn't exist, return a 404 error
+    if movie_to_delete is None:
+        abort(404)
+    movie_repository.delete_movie(movie_id)
+    
+    return redirect('/movies')
