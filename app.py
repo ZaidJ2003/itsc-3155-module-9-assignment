@@ -16,7 +16,7 @@ def index():
 
 @app.get('/movies')
 def list_all_movies():
-    # TODO: Feature 1
+    # TODO: Feature 1 
     global movie_repository
     temp_dict = movie_repository.get_all_movies()
     return render_template('list_all_movies.html', temp_dict = temp_dict, list_movies_active=True)
@@ -44,9 +44,7 @@ def search_movies():
     else: 
         movies = movie_repository.get_all_movies()
  
- 
-
-    return render_template('search_movies.html',movies=movies,  search_active=True)
+    return render_template('search_movies.html', movies=movies, search_active=True)
 
 
 @app.get('/movies/<int:movie_id>')
