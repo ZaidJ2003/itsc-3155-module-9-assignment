@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request
+from flask import Flask, abort, redirect, render_template, request
 
 from src.repositories.movie_repository import get_movie_repository
 
@@ -53,6 +53,8 @@ def search_movies():
 def get_single_movie(movie_id: int):
     # TODO: Feature 4
     single_movie = movie_repository.get_movie_by_id(movie_id)
+    if single_movie is None:
+        abort(400)
     return render_template('get_single_movie.html', single_movie = single_movie, movie_id = movie_id)
 
 
