@@ -42,16 +42,21 @@ def create_movie():
     return redirect('/movies')
 
 
-@app.get('/movies/search')
+@app.route('/movies/search')
 def search_movies():
     # TODO: Feature 3 
-    title = request.form.get('title') 
-    if title: 
+    title = request.args.get('title') 
+    movies = None
+    if title:
         movies = movie_repository.get_movie_by_title(title)
-    
-    else: 
-        movies = movie_repository.get_all_movies()
- 
+        '''
+        temp_dict = movie_repository.get_all_movies()
+        for key, value in temp_dict.items():
+            if value == movie:
+                movies = movie
+        
+                '''   
+     
     return render_template('search_movies.html', movies=movies, search_active=True)
 
 

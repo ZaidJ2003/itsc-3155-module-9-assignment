@@ -17,16 +17,16 @@
 
 <div class="mt-5"> 
     <h2> Search Results</h2>
-    {% if movies %}
-        {% for movie in movies %}
+    {% if movies %} 
+
             <div class="mb-3"> 
-                <h3>{{movie.title}}</h3>
-                <p>Rating: {{movie.rating }}</p>
+                <h3>{{movies.title}}</h3>
+                <p>Rating: {{movies.rating }}</p>
             </div>
-        {% endfor %}
-    {% else %}
+    
+     {% else %}
         <p>No Movies Found</p>
-    {% endif %}            
+    {% endif %}     
 
 </div>
 
