@@ -56,7 +56,6 @@ def search_movies():
                 movies = movie
         
                 '''   
-     
     return render_template('search_movies.html', movies=movies, search_active=True)
 
 
